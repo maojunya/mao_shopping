@@ -4,34 +4,21 @@
 
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
-	<!-- <session-config>
-		<session-timeout>45</session-timeout>
-	</session-config> -->
+	<!-- <session-config> <session-timeout>45</session-timeout> </session-config> -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:applicationContext.xml</param-value>
-	</context-param>	
+	</context-param>
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<!-- <filter>
-		<filter-name>AuthenticationFilter</filter-name>
-		<filter-class>com.pwc.star.common.AuthenticationFilter</filter-class>
-		<init-param>
-			<param-name>excludePages</param-name>
-			<param-value>/login-form.html;/sessionExpired.html;/messgeAlert.html;/register;/favicon.ico;/index.html;/loginPage.html;/navBar.html;/steps-bar.html;/login;/getDom;/out;/capturedImage.html;/capturedSVGMap.html;/captureImagePage.html</param-value>
-		</init-param>
-		<init-param>
-			<param-name>excludeUrls</param-name>
-			<param-value>/css/;/data/;/fonts/;/images/;/js/</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>AuthenticationFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<!-- <filter> <filter-name>AuthenticationFilter</filter-name> <filter-class>com.pwc.star.common.AuthenticationFilter</filter-class> 
+		<init-param> <param-name>excludePages</param-name> <param-value>/login-form.html;/sessionExpired.html;/messgeAlert.html;/register;/favicon.ico;/index.html;/loginPage.html;/navBar.html;/steps-bar.html;/login;/getDom;/out;/capturedImage.html;/capturedSVGMap.html;/captureImagePage.html</param-value> 
+		</init-param> <init-param> <param-name>excludeUrls</param-name> <param-value>/css/;/data/;/fonts/;/images/;/js/</param-value> 
+		</init-param> </filter> <filter-mapping> <filter-name>AuthenticationFilter</filter-name> 
+		<url-pattern>/*</url-pattern> </filter-mapping> -->
 
 	<servlet>
 		<servlet-name>rest</servlet-name>

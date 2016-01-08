@@ -30,12 +30,12 @@ public class LoginDaoImpl extends BaseDao implements LoginDao {
 
 	@Override
 	public User getUserById(String uid) throws Exception {
-		String sql = "select top 1 * from star_usr where usr_id = ? collate Chinese_PRC_CS_AI and registered_flag = 'Y' ";
+		String sql = "select * from t_login where login_id = ?;";
 
 		List<User> users = null;
 
 		try {
-			users = getJdbcTemplate().query(sql, new Object[] { uid },
+			users = getJdbcTemplate().query(sql, new Object[] { 1 },
 					new UserMapper());
 
 		} catch (Exception e) {

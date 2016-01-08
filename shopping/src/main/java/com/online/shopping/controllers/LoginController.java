@@ -1,30 +1,23 @@
 package com.online.shopping.controllers;
 
-import java.util.Calendar;
 import java.util.Properties;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-
-
-
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.online.shopping.beans.ResultMessage;
 import com.online.shopping.beans.User;
 import com.online.shopping.common.Constants;
 import com.online.shopping.common.RespStatus;
+import com.online.shopping.dao.LoginDao;
+import com.online.shopping.service.LoginService;
 
 @RestController
 @RequestMapping("/login")
@@ -33,6 +26,9 @@ public class LoginController {
 	
 	@Resource
 	private Properties appProperties;
+	
+	@Resource
+    private LoginService loginService; 
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResultMessage login(@RequestParam("userName") String userId,
@@ -45,10 +41,12 @@ public class LoginController {
 
 		try {
 			String uid = StringUtils.trimToEmpty(userId);
+			
+			User u = loginService.getUserById(userId);
 
 			rm.setCode(1);
 			rm.setResult(RespStatus.SUCCESS);
-
+			rm.setResultObject(u);
 			logger.info("---------- User: " + userId
 					+ " has been logined successfully. -----------------");
 

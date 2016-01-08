@@ -11,12 +11,12 @@ public class MapperUtil {
 
 	public static User getUserById(ResultSet rs, User u) throws SQLException {
 
-		User createdU = new User();
-		createdU.setUserId(rs.getString("CREATED_BY_USR_ID"));
-		User updatedU = new User();
-		updatedU.setUserId(rs.getString("UPDATED_BY_USR_ID"));
-
-		return u;
+		u.setUserId(rs.getString("login_account"));
+        u.setFirstName(rs.getString("login_firstName"));
+        u.setLastName(rs.getString("login_lastName"));
+        u.setPassword(rs.getString("login_pwd"));       
+        return u;
+		
 	}
 
 }
