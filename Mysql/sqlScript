@@ -1,0 +1,19 @@
+select * from t_login where login_id = 1;
+
+insert into t_login(login_account, login_pwd, login_firstName, login_lastName, accessCode) value 
+('maojunya', 'maojunya', 'Jack', 'Mao', 'shopping')
+insert into t_login(login_account, login_pwd, login_firstName, login_lastName, accessCode) value 
+('shibing', 'shibing', 'StoneIce', 'Shi', 'shopping')
+
+drop table t_login;
+
+CREATE TABLE t_login (
+	login_id INT primary key not null auto_increment,
+	login_account CHAR(20) NOT NULL,
+	login_pwd CHAR(20) NOT NULL,
+	login_firstName CHAR(100) NOT NULL,
+	login_lastName CHAR(100) NOT NULL,
+	accessCode CHAR(100) NOT NULL
+)
+
+desc t_login
