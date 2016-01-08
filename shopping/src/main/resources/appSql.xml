@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sqls>
+<sql id="getAllProvidersForClient">
+<![CDATA[
+select a.*,b.CMI,b.ACT_CARE_OPR_BEDS num_of_beds,zip.cnty_st_fips,zip.cty,zip.cbsa,zip.cbsa_nm, zip.CNTY_FIPS, zip.ST_FIPS 
+from PRV_DIMENSION a , vw_prvfact b, zip zip  
+where left(b.latest_time_id, 4) = ? and a.prv_num = b.prv_num and a.hsp_zip = zip.zip
+  ]]>
+</sql>	
+</sqls>
