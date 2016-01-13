@@ -7,7 +7,7 @@
 	<!-- <session-config> <session-timeout>45</session-timeout> </session-config> -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath*:applicationContext.xml</param-value>
+		<param-value>/WEB-INF/classes/xmlFiles/**/*.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>
