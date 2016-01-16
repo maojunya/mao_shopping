@@ -11,8 +11,6 @@ import lombok.Setter;
 @Getter
 public class BaseBean {
 
-    private User createdBy;
-    private User updateBy;
     private Date createdDate;
     private Date updatedDate;
     

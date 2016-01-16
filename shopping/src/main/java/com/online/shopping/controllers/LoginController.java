@@ -1,6 +1,7 @@
 package com.online.shopping.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -9,6 +10,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolation;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.online.shopping.beans.BaseBean;
 import com.online.shopping.beans.ResultMessage;
 import com.online.shopping.beans.User;
+import com.online.shopping.beans.Users;
 import com.online.shopping.common.Constants;
 import com.online.shopping.common.RespStatus;
 import com.online.shopping.dao.LoginDao;
@@ -30,7 +34,7 @@ import com.online.shopping.service.LoginService;
 
 @RestController
 @RequestMapping("/login")
-public class LoginController {
+public class LoginController extends BaseController {
 	Logger logger = Logger.getLogger(LoginController.class);
 	
 	@Resource
@@ -111,10 +115,12 @@ public class LoginController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ResultMessage registerUser(@RequestBody User newUser)
 			throws Exception {
+		ArrayList<HashMap<String, String>> errorList = checkObject(newUser);
 		ResultMessage rm = new ResultMessage();
 		
-		rm.setCode(0);
-		rm.setResult(RespStatus.FAILED);
+		rm.setCode(1);
+		rm.setResult(RespStatus.SUCCESS);
+		rm.setResultObject(errorList);
 		rm.setDescription("Register Failed!");
 		logger.debug("----------registerUser-----------");
 		return rm;
