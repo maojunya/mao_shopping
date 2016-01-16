@@ -1,0 +1,4 @@
+com\chr\service\impl\UserOperationsServiceImpl.class
+com\chr\controller\UserController.class
+com\chr\domain\User.class
+com\chr\service\UserOperationsService.class
