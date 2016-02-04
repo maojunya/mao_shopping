@@ -70,7 +70,7 @@ public class LoginController extends BaseController {
 
 		return rm;
 	}
-
+	
 	@RequestMapping(value = "/out", method = RequestMethod.GET)
 	public ResultMessage loginOut(HttpSession session) {
 		ResultMessage rm = new ResultMessage();

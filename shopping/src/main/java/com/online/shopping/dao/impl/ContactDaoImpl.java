@@ -41,6 +41,7 @@ public class ContactDaoImpl implements ContactDao {
 
 	@Transactional(readOnly=true)
 	public List<Contact> findAll() {
+		
 		return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
 	}
 
