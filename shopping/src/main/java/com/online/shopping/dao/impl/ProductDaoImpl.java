@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
 	public Product findByID(String ID) {
 		// TODO Auto-generated method stub
 		List<Product> Products = sessionFactory.getCurrentSession()
-		.createSQLQuery("select * from product where productid ='"+ ID+"'")
+		.createSQLQuery("select * from product where id ="+ ID)
 		.addEntity(Product.class).list();
 		if(Products.size() == 0){
 			return null;
@@ -56,12 +56,29 @@ public class ProductDaoImpl implements ProductDao {
 			
 			Product p = (Product)Products.get(i);
 			
-			sessionFactory.getCurrentSession().save(p);
+			sessionFactory.getCurrentSession().saveOrUpdate(p);
 			if(i % 3 == 0 && i !=0 ){
 				sessionFactory.getCurrentSession().flush();
 			}
 		}		
 		return true;
 	}
+	
+	@Override
+	public Boolean deleteProducts(List Products){		
+		for(int i = 0; i < Products.size(); i++){
+			
+			Product p = (Product)Products.get(i);
+			
+			sessionFactory.getCurrentSession().delete(p);
+			if(i % 3 == 0 && i !=0 ){
+				sessionFactory.getCurrentSession().flush();
+			}
+		}		
+		return true;
+	}
+	
+	
+	
 
 }

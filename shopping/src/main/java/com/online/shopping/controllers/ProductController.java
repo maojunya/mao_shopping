@@ -75,17 +75,23 @@ public class ProductController extends BaseController {
 		return rm;
 	}
 	
-	@RequestMapping(value = "/saveProducts", method = RequestMethod.POST)
-	public ResultMessage saveProducts(@RequestBody Products products) throws Exception {
+	@RequestMapping(value = "/saveOrUpdateProducts", method = RequestMethod.POST)
+	public ResultMessage saveOrUpdateProducts(@RequestBody Products products) throws Exception {
 		ResultMessage rm = new ResultMessage();				
 		rm.setCode(1);
 		rm.setResult(RespStatus.SUCCESS);
-		try {
-			rm.setResultObject(productService.saveProducts(products.getProducts()));
-		} catch (Exception e) {
-			logger.error(e.getMessage());
-		}
-				
+		rm.setResultObject(productService.saveProducts(products.getProducts()));
+		rm.setDescription("One product selected");
+		logger.debug("----------loginOut-----------");
+		return rm;
+	}
+	
+	@RequestMapping(value = "/DeleteProducts", method = RequestMethod.POST)
+	public ResultMessage deleteProducts(@RequestBody Products products) throws Exception {
+		ResultMessage rm = new ResultMessage();				
+		rm.setCode(1);
+		rm.setResult(RespStatus.SUCCESS);
+		rm.setResultObject(productService.deleteProducts(products.getProducts()));
 		rm.setDescription("One product selected");
 		logger.debug("----------loginOut-----------");
 		return rm;

@@ -20,5 +20,8 @@ public interface ProductService {
     
     public Boolean saveProducts(List Products) throws Exception; 
     
+    public Boolean deleteProducts(List Products) throws Exception; 
+    
+    
 
 }

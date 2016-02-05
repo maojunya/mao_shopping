@@ -36,6 +36,12 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.saveProducts(Products);
 	} 
 	
+	@Override
+    public Boolean deleteProducts(List Products) throws Exception{
+		return productDao.deleteProducts(Products);
+	}
+
+	
 	
 	
 

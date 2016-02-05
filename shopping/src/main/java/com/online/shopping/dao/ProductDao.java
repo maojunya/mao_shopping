@@ -23,4 +23,7 @@ public interface ProductDao {
 	
 	public Boolean saveProducts(List Products);
 	
+	public Boolean deleteProducts(List Products);
+	
+	
 }
