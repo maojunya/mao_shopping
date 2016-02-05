@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.online.shopping.beans.BaseBean;
+import com.online.shopping.beans.Categories;
 import com.online.shopping.beans.Products;
 import com.online.shopping.beans.ResultMessage;
+import com.online.shopping.beans.Tx;
 import com.online.shopping.beans.User;
 import com.online.shopping.beans.Users;
 import com.online.shopping.common.Constants;
@@ -33,6 +35,7 @@ import com.online.shopping.dao.impl.LoginDaoImpl;
 import com.online.shopping.domain.Contact;
 import com.online.shopping.domain.Hobby;
 import com.online.shopping.domain.Product;
+import com.online.shopping.service.CategoryService;
 import com.online.shopping.service.LoginService;
 import com.online.shopping.service.ProductService;
 
@@ -46,7 +49,7 @@ public class ProductController extends BaseController {
 
 	@Resource
 	private ProductService productService;
-
+	
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
 	public ResultMessage findAll(HttpSession session) throws Exception {
 		ResultMessage rm = new ResultMessage();				
@@ -92,6 +95,41 @@ public class ProductController extends BaseController {
 		rm.setCode(1);
 		rm.setResult(RespStatus.SUCCESS);
 		rm.setResultObject(productService.deleteProducts(products.getProducts()));
+		rm.setDescription("One product selected");
+		logger.debug("----------loginOut-----------");
+		return rm;
+	}
+	
+	
+	@RequestMapping(value = "/saveCategories", method = RequestMethod.POST)
+	public ResultMessage saveCategories(@RequestBody Categories categories) throws Exception {
+		ResultMessage rm = new ResultMessage();				
+		rm.setCode(1);
+		rm.setResult(RespStatus.SUCCESS);
+		rm.setResultObject(productService.saveCategories(categories.getCategories()));
+		rm.setDescription("One product selected");
+		logger.debug("----------loginOut-----------");
+		return rm;
+	}
+	
+	
+	@RequestMapping(value = "/deleteCategories", method = RequestMethod.POST)
+	public ResultMessage deleteCategories(@RequestBody Categories categories) throws Exception {
+		ResultMessage rm = new ResultMessage();				
+		rm.setCode(1);
+		rm.setResult(RespStatus.SUCCESS);
+		rm.setResultObject(productService.deleteCategories(categories.getCategories()));
+		rm.setDescription("One product selected");
+		logger.debug("----------loginOut-----------");
+		return rm;
+	}
+	
+	@RequestMapping(value = "/testTx", method = RequestMethod.POST)
+	public ResultMessage testTx(@RequestBody Tx tx) throws Exception {
+		ResultMessage rm = new ResultMessage();				
+		rm.setCode(1);
+		rm.setResult(RespStatus.SUCCESS);
+		rm.setResultObject(productService.testTx(tx));
 		rm.setDescription("One product selected");
 		logger.debug("----------loginOut-----------");
 		return rm;

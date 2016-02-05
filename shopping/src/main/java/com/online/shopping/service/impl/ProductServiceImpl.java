@@ -8,6 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.online.shopping.beans.Tx;
+import com.online.shopping.dao.CategoryDao;
 import com.online.shopping.dao.ProductDao;
 import com.online.shopping.domain.Product;
 import com.online.shopping.service.ProductService;
@@ -18,6 +20,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Resource
 	private ProductDao productDao;
+	
+	@Resource
+	private CategoryDao categoryDao;
 
 	@Override
 	public List<Product> getAllProduct() throws Exception {
@@ -40,9 +45,23 @@ public class ProductServiceImpl implements ProductService {
     public Boolean deleteProducts(List Products) throws Exception{
 		return productDao.deleteProducts(Products);
 	}
+	
+	@Override
+    public Boolean saveCategories(List Categories) throws Exception{
+		return categoryDao.saveCategories(Categories);
+	}
 
 	
+	@Override
+    public Boolean deleteCategories(List Categories) throws Exception{
+		return categoryDao.deleteCategories(Categories);
+	}
 	
-	
+	@Override
+	public Boolean testTx(Tx tx) throws Exception{
+		categoryDao.saveCategories(tx.getCategories());		
+		productDao.saveProducts(tx.getProducts());
+		return false;
+	}
 
 }

@@ -28,57 +28,48 @@ public class ProductDaoImpl implements ProductDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Product> findAll() {			
-		
+	public List<Product> findAll() {
 
-		
-		return (List<Product>)sessionFactory.getCurrentSession()
-				.createSQLQuery("select * from product").addEntity(Product.class).list();
-		//return products;
+		return (List<Product>) sessionFactory.getCurrentSession()
+				.createSQLQuery("select * from product")
+				.addEntity(Product.class).list();
+		// return products;
 	}
 
 	@Override
 	public Product findByID(String ID) {
 		// TODO Auto-generated method stub
 		List<Product> Products = sessionFactory.getCurrentSession()
-		.createSQLQuery("select * from product where id ="+ ID)
-		.addEntity(Product.class).list();
-		if(Products.size() == 0){
+				.createSQLQuery("select * from product where id =" + ID)
+				.addEntity(Product.class).list();
+		if (Products.size() == 0) {
 			return null;
-		}else{
+		} else {
 			return Products.get(0);
-		}		
+		}
 	}
-	
-	@Override
-	public Boolean saveProducts(List Products){		
-		for(int i = 0; i < Products.size(); i++){
-			
-			Product p = (Product)Products.get(i);
-			
-			sessionFactory.getCurrentSession().saveOrUpdate(p);
-			if(i % 3 == 0 && i !=0 ){
-				sessionFactory.getCurrentSession().flush();
-			}
-		}		
-		return true;
-	}
-	
-	@Override
-	public Boolean deleteProducts(List Products){		
-		for(int i = 0; i < Products.size(); i++){
-			
-			Product p = (Product)Products.get(i);
-			
-			sessionFactory.getCurrentSession().delete(p);
-			if(i % 3 == 0 && i !=0 ){
-				sessionFactory.getCurrentSession().flush();
-			}
-		}		
-		return true;
-	}
-	
-	
-	
 
+	@Override
+	public Boolean saveProducts(List Products) {
+		for (int i = 0; i < Products.size(); i++) {
+			Product p = (Product) Products.get(i);
+			sessionFactory.getCurrentSession().saveOrUpdate(p);
+			if (i % 3 == 0 && i != 0) {
+				sessionFactory.getCurrentSession().flush();
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean deleteProducts(List Products) {
+		for (int i = 0; i < Products.size(); i++) {
+			Product p = (Product) Products.get(i);
+			sessionFactory.getCurrentSession().delete(p);
+			if (i % 3 == 0 && i != 0) {
+				sessionFactory.getCurrentSession().flush();
+			}
+		}
+		return true;
+	}
 }
