@@ -1,6 +1,7 @@
 
 package com.online.shopping.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.online.shopping.beans.User;
@@ -11,7 +12,7 @@ public interface LoginService {
     /**
      *  Get user with its id, this id is added by DBA.
      */
-    public User getUserById(String uid) throws Exception;
+    public User getUserById(HashMap<String, String> hs) throws Exception;
     
     public List<Contact> findAllContact()  throws Exception;
     

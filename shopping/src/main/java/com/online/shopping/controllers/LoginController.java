@@ -44,27 +44,27 @@ public class LoginController extends BaseController {
     private LoginService loginService; 
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResultMessage login(@RequestParam("userName") String userId,
+	public ResultMessage login(@RequestParam("userName") String userName,
 			@RequestParam("password") String password, HttpSession session,
 			HttpServletRequest request) {
-		logger.info("---------- User: " + userId
-				+ " access application. -----------------");
-
 		ResultMessage rm = new ResultMessage();
 
 		try {
-			String uid = StringUtils.trimToEmpty(userId);
-			
-			User u = loginService.getUserById(userId);					
-			rm.setCode(1);
-			rm.setResult(RespStatus.SUCCESS);
-			rm.setResultObject(u);
-			logger.info("---------- User: " + userId
-					+ " has been logined successfully. -----------------");
-
+			HashMap<String, String> hs = new HashMap<>();
+			hs.put("userName", userName);
+			hs.put("password", password);
+			User u = loginService.getUserById(hs);		
+			if(u != null){
+				session.setAttribute(Constants.USER_SESSION, u);
+				rm.setCode(1);
+				rm.setResult(RespStatus.SUCCESS);
+				rm.setResultObject(u);
+			}else{
+				throw new Exception();
+			}			
 		} catch (Exception e) {
 			rm.setResult(RespStatus.FAILED);
-			rm.setMessage("Invalid to login with error code: E0001.");
+			rm.setMessage("account or password is wrong");
 			logger.error("---------- Error for user login, code is E0001", e);
 		}
 

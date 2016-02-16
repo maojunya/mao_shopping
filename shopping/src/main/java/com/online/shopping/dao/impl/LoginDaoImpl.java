@@ -1,22 +1,10 @@
 package com.online.shopping.dao.impl;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
 import com.online.shopping.beans.User;
 import com.online.shopping.beans.mapper.UserMapper;
 import com.online.shopping.dao.BaseDao;
@@ -29,13 +17,12 @@ public class LoginDaoImpl extends BaseDao implements LoginDao {
 	Logger logger = Logger.getLogger(LoginDaoImpl.class);	
 
 	@Override
-	public User getUserById(String uid) throws Exception {
-		String sql = "select * from t_login where login_id = ?;";
+	public User getUserById(HashMap<String, String> hs) throws Exception {
+		String sql = "select * from t_login where login_account = ? and login_pwd = ?;";
 
-		List<User> users = null;
-
+		List<User> users = null;		
 		try {
-			users = getJdbcTemplate().query(sql, new Object[] { 1 },
+			users = getJdbcTemplate().query(sql, new Object[] { hs.get("userName"), hs.get("password")},
 					new UserMapper());
 
 		} catch (Exception e) {

@@ -2,6 +2,7 @@ package com.online.shopping.service.impl;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,8 +25,8 @@ public class LoginServiceImpl implements LoginService {
     private ContactDao contactDao;
    
     @Override
-    public User getUserById(String uid) throws Exception {
-        return loginDao.getUserById(uid);
+    public User getUserById(HashMap<String, String> hs) throws Exception {
+        return loginDao.getUserById(hs);
     }
 
 	@Override
